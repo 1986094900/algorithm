@@ -1,0 +1,108 @@
+函数参数是数量很大的vector等时，传引用比传值速度快，因为传值要拷贝整个数组，传引用只需传一个地址
+
+264 丑数:所有大于1的正整数都能被分为2,3,5
+
+c++ string 转 int
+#include <stdlib.h>
+string s="123456";
+int i=atoi(s.c_str());//string先转char* ,再用atoi转int
+                      //atof atol atoll......
+
+int(double,float,long......) 转 string
+#include<string>
+string to_string(int a)
+
+vector(n)会默认在vector里添加n个0
+
+#include<algorithm>
+reverse(vector.begin(),vector.end());
+sort(vector.begin(),vector.end(),sort);//默认升序
+bool sort(int a,int b){//降序
+return a>b;
+}
+
+958.队列判断完全二叉树，岛屿个数(BFS)，树的宽度优先搜索
+
+完全二叉树高度不必遍历整个树，利用完全二叉树底层靠近左边的性质，只要一直通过递归左子树就可得到高度
+
+c++正则表达式
+regex r("-?[0-9]+");//匹配数字
+string s="9995";
+if(regex_match(s,r)){
+..........
+}
+
+(n+m)/2有可能溢出,写为n+(m-n)/2比较好
+
+路径总和III:双重递归寻找二叉树中任意单方向的路径
+
+二叉树中找到一条不一定经过根节点的路径:124.二叉树中的最大路径和 687.最长同值路径
+周赛140 5084.二叉树任意一个节点 根到叶的最长路径
+
+662. 二叉树最大宽度 199.二叉树右视图 用vector.size和深度保存每层的最左(先左后右dfs)或最右节点(先右后左dfs),
+if(depth==left.size()) left.push_back(index) 用来作为判断第一次进入二叉树某一层的方法
+
+判断两棵树是否相同
+bool isSame(TreeNode* m, TreeNode* n){//判断两棵树是否相同
+        if(m==NULL && n==NULL) return true;
+        if(m==NULL || n==NULL) return false;//一个为空,一个不为空
+        return m->val==n->val && isSame(m->left, n->left) && isSame(m->right, n->right);
+    }
+
+求连通数:947.移除最多的同行或同列石头 并查集或dfs求连通数 求岛屿个数 bfs求连通数
+
+
+
+map<string, multiset<string>> targets;表示邻接表
+map<int ,vector<vector<int>> m;
+
+数组倒序
+vector<string>(route.rbegin(), route.rend())
+构造极大堆
+priority_queue<int, vector<int>, less<int> > pq;
+构造极小堆
+priority_queue<int, vector<int>, greater<int> > pq;
+
+
+链表节点分配空间
+ListNode* node=(ListNode*)malloc(sizeof(ListNode));
+ListNode* node=new ListNode(val);
+
+234.回文链表
+快慢指针寻找链表中点,判断链表是否有环
+public ListNode middleNode(ListNode head) {
+        ListNode p = head, q = head;
+        
+        while(q != null && q.next != null) {
+            p = p.next;
+            q = q.next.next;
+        }
+        
+        return p;
+    }
+如果链表个数是偶数，p指向第(size/2)+1个节点
+单链表倒序
+
+动态规划求连续子序列
+53.最大子序和 list[i]=max(nums[i],list[i-1]+nums[i]);
+152. 乘积最大子序列 imax = max(A[i], imax * A[i]);imin = min(A[i], imin * A[i]);
+
+
+判断奇偶数
+if ((sum & 1) == 1) {
+        return false;
+}
+
+
+腐烂的橘子，两个区域间最短桥：用queue把区域的点全部存储，再用BFS扩展，计算扩展步数
+
+109.高度平衡的二叉搜索树的根节点是二叉搜索树代表的链表的中点，二分法。
+
+150	
+逆波兰表达式求值
+波兰表达式，逆波兰表达式求值，以及相互转化见如下教程
+https://blog.csdn.net/yuanlaijike/article/details/82346369
+
+
+173. 二叉搜索树迭代器
+栈实现二叉搜索树的遍历，O(n)时间，O(logn)空间
