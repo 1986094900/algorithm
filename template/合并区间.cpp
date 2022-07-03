@@ -29,6 +29,30 @@ public:
     int count() {
         return sum;
     }
+	
+	typedef pair<int, int> PII;
+	set<PII> mergeInternal(vector<PII>& internals) {
+        set<PII> segs(internals.begin(), internals.end());
+        set<PII>::iterator cur = segs.begin();
+        while (cur != segs.end()) {
+            int end = cur->second;
+            int arr = end;
+            auto del = cur;
+            ++del;
+            while (del != segs.end() && del->first <= arr) {
+                arr = std::max(arr, del->second);
+                segs.erase(del++);
+            }
+            if (arr > end) {
+                PII new_pair = {cur->first, arr};
+                segs.erase(cur);
+                segs.insert(new_pair);
+                cur = segs.find(new_pair);
+            }
+            ++cur;
+        }
+        return segs;
+    }
 };
 
 int main()
